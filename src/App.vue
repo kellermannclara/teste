@@ -33,34 +33,15 @@ let tarefasFiltradas = computed(() => {
 })
 
 function adicionar() {
-
-
-
-  if (novaTarefa.value.trim() === '') {
-    semTarefa.value = 'Escreva algo'
-    return
+    tarefas.value.push(
+      {
+        id: Math.max(...tarefas.value.map(item => item.id)),
+        desc: novaTarefa.value,
+        status: 'pendente'
+      }
+    )
+    novaTarefa.value = '';
   }
-
-
-  if (editando.value !== null) {
-    const tarefa = tarefas.value.find(item => item.id === editando.value)
-    tarefa.desc = novaTarefa.value
-    editando.value = null
-  } else {
-
-    tarefas.value.push({
-      id: Math.max(...tarefas.value.map(item => item.id)),
-      desc: novaTarefa.value,
-      status: 'pendente'
-    })
-
-  }
-
-  novaTarefa.value = ''
-  semTarefa.value = ''
-
-
-}
 
 function deletar(item) {
   const posicao = tarefas.value.indexOf(item);
@@ -68,10 +49,10 @@ function deletar(item) {
 }
 
 
-function editar(item) {
-  novaTarefa.value = item.desc
-  editando.value = item.id
-}
+// function editar(item) {
+//   novaTarefa.value = item.desc
+//   editando.value = item.id
+// }
 
 function marcarConcluida(id) {
   const posicao = tarefas.value.findIndex(item => item.id === id);
@@ -84,7 +65,6 @@ function marcarConcluida(id) {
   <div class="container">
     <h1>Lista de Tarefas</h1>
 
-    <p v-if="semTarefa"> {{ semTarefa }} </p>
     <input type="text" v-model="novaTarefa">
     <button @click="adicionar">Adicionar</button>
 
@@ -109,6 +89,38 @@ function marcarConcluida(id) {
 </template>
 
 <style scoped>
+
+.container button {
+  margin-left: 10px;
+  font-size: 1vw;
+}
+
+.container input {
+  font-size: 1vw;
+  background-color: rgb(187, 187, 187);
+}
+
+.container {
+  background-color: white;
+  padding: 5vw 7vw;
+  border-radius: 20px;
+  text-align: center;
+}
+.container h1 {
+  color: black;
+  margin-bottom: 1vw;
+}
+
+.container li {
+  color: black;
+  margin: 5px 0 5px 0;
+}
+
+.container span {
+  /* background-color: aqua; */
+  margin: 10px;
+}
+
 .concluida {
   text-decoration: line-through;
 }
