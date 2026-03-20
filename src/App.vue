@@ -96,6 +96,7 @@ function marcarConcluida(id) {
     </ul>
 
     <input type="text" placeholder="Filtrar Tarefa" v-model="filtro">
+    <button @click="tarefas.sort((a, b) => a.desc.localeCompare(b, 'pt-BR'))">Ordernar</button>
 
     <p> Pendentes: {{ pendentes }}</p>
     <p>Concluidas: {{ concluidas }}</p>
