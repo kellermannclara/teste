@@ -32,6 +32,8 @@ let tarefasFiltradas = computed(() => {
 })
 
 function adicionar() {
+
+
     tarefas.value.push(
       {
         id: Math.max(...tarefas.value.map(item => item.id)) +1,
@@ -40,7 +42,7 @@ function adicionar() {
       }
     )
     novaTarefa.value = '';
-  }
+}
 
 function deletar(id) {
   tarefas.value = tarefas.value.filter(item => item.id != id);
@@ -64,7 +66,7 @@ function marcarConcluida(id) {
   if (tarefas.value[posicao].status === 'pendente') {
 
     tarefas.value[posicao].status = 'concluida';
-    
+
   } else {
     tarefas.value[posicao].status = 'pendente';
   }
