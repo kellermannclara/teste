@@ -206,6 +206,7 @@ function marcarConcluida(id) {
 .container li {
   color: white;
   margin: 5px 0 5px 0;
+  font-size: 1vw;
 }
 
 .container span {
