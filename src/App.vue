@@ -57,14 +57,18 @@ function deletar(id) {
 // }
 
 
-// function editar(item) {
-//   novaTarefa.value = item.desc
-//   editando.value = item.id
-// }
-
 function marcarConcluida(id) {
+
   const posicao = tarefas.value.findIndex(item => item.id === id);
-  tarefas.value[posicao].status = 'concluida';
+  
+  if (tarefas.value[posicao].status === 'pendente') {
+
+    tarefas.value[posicao].status = 'concluida';
+    
+  } else {
+    tarefas.value[posicao].status = 'pendente';
+  }
+  
 }
 
 </script>
