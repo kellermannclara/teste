@@ -7,7 +7,6 @@ let semTarefa = ref('')
 
 let filtro = ref('')
 
-let editando = ref(null)
 
 let tarefas = ref([
   { id: 1, desc: 'Estudar VueJS', status: 'pendente' },
@@ -35,7 +34,7 @@ let tarefasFiltradas = computed(() => {
 function adicionar() {
     tarefas.value.push(
       {
-        id: Math.max(...tarefas.value.map(item => item.id)),
+        id: Math.max(...tarefas.value.map(item => item.id)) +1,
         desc: novaTarefa.value,
         status: 'pendente'
       }
@@ -43,10 +42,19 @@ function adicionar() {
     novaTarefa.value = '';
   }
 
-function deletar(item) {
-  const posicao = tarefas.value.indexOf(item);
-  tarefas.value.splice(posicao, 1)
+function deletar(id) {
+  tarefas.value = tarefas.value.filter(item => item.id != id);
 }
+
+// function deleteTarefa(item) {
+//   const posicao = tarefas.value.indexOf(item);
+//   tarefas.value.splice(posicao, 1);
+// }
+
+// function editarTarefa(item) {
+//   alteracao.value = tarefas.value.indexOf(item)
+//   nova.value = item;
+// }
 
 
 // function editar(item) {
@@ -74,8 +82,8 @@ function marcarConcluida(id) {
         {{ item.desc }}
 
         <span>
-          <a href="#" @click.prevent="deletar">Deletar</a>
-          <a href="#" @click.prevent="editar">Editar</a>
+          <button @click.prevent.stop="deletar(item.id)">Deletar</button>
+          <button @click="">Editar</button>
         </span>
 
       </li>
@@ -101,18 +109,18 @@ function marcarConcluida(id) {
 }
 
 .container {
-  background-color: white;
+  background-color: black;
   padding: 5vw 7vw;
   border-radius: 20px;
   text-align: center;
 }
 .container h1 {
-  color: black;
+  color: white;
   margin-bottom: 1vw;
 }
 
 .container li {
-  color: black;
+  color: white;
   margin: 5px 0 5px 0;
 }
 
